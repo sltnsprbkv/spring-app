@@ -2,24 +2,16 @@ package org.example;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Random;
+
 @Component
 public class ClassicalMusic implements Music{
-    private ClassicalMusic() {}
-
-    public static ClassicalMusic getClassicalMusic() {
-        return new ClassicalMusic();
-    }
-
-    public void doMyInit() {
-        System.out.println("Doing my init");
-    }
-
-    public void doMyDestroy() {
-        System.out.println("Doing my destroy");
-    }
+    List<String> classicalMusicList = List.of("classical song 1", "classical song 2", "classical song 3");
 
     @Override
     public String getSong() {
-        return "classic song";
+        Random rand = new Random();
+        return classicalMusicList.get(rand.nextInt(classicalMusicList.size()));
     }
 }

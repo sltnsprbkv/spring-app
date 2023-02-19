@@ -1,42 +1,21 @@
 package org.example;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MusicPlayer {
-    private List<Music> musicList;
-    private String name;
-    private int volume;
+    @Autowired
+    @Qualifier("classicalMusic")
+    private Music music;
 
-    public String getName() {
-        return name;
+    public void playMusic(MusicGenre musicGenre) {
+        switch (musicGenre) {
+            case ROCK -> System.out.println("Playing: " + music.getSong());
+            case CLASSICAL -> System.out.println("Playing: " + music.getSong());
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    // IoC
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public MusicPlayer() {}
-
-    public void setMusic(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public void playMusic() {
-        musicList.forEach(
-                music -> System.out.println("Playing: " + music.getSong())
-        );
-    }
 }
